@@ -102,7 +102,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                QueryApi.register();
+                //QueryApi.register('zefzf@gmail.com', 'zefzf', 'azeaze', 'azeaze');
+                QueryApi.login('zefzf@gmail.com', 'azeaze');
               },
               style: ElevatedButton.styleFrom(
                 primary: ColorManager.primary,
@@ -232,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/register');
+                      Navigator.pushNamed(context, '/registerFirst');
                     },
                     child:
                     const Text('S\'enregistrer',
