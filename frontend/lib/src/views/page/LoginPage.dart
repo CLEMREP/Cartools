@@ -96,37 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Confirmation mot de passe', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    hintText: '**********',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                          color: ColorManager.secondary50
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(
-                          color: ColorManager.primary
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(
               height: 30,
             ),
@@ -143,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
                   SizedBox(),
-                  Text('Continuer'),
+                  Text('Se connecter'),
                   Icon(Icons.chevron_right),
                 ],
               ),
@@ -202,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: 8,
                   ),
-                  Text('Continuer avec Google',
+                  Text('Se connecter avec Google',
                     style: TextStyle(
                       color: ColorManager.secondary,
                     ),
@@ -235,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: 8,
                   ),
-                  Text('Continuer avec Apple',
+                  Text('Se connecter avec Apple',
                     style: TextStyle(
                       color: ColorManager.secondary,
                     ),
@@ -250,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Vous avez déja un compte ?',
+                  const Text('Vous n\'avez pas de compte ?',
                     style: TextStyle(
                       color: ColorManager.secondary,
                     ),
@@ -260,10 +229,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/login');
+                      Navigator.pushNamed(context, '/register');
                     },
                     child:
-                    const Text('Se connecter',
+                    const Text('S\'enregistrer',
                       style: TextStyle(
                         color: ColorManager.secondary,
                         fontWeight: FontWeight.bold,
