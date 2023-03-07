@@ -33,8 +33,10 @@ class NewPasswordController extends Controller
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
+                /** @var string $password */
+                $password = $request->password;
                 $user->forceFill([
-                    'password' => Hash::make($request->password),
+                    'password' => Hash::make($password),
                     'remember_token' => Str::random(60),
                 ])->save();
 
@@ -42,6 +44,7 @@ class NewPasswordController extends Controller
             }
         );
 
+        /** @var string $status */
         if ($status != Password::PASSWORD_RESET) {
             throw ValidationException::withMessages([
                 'email' => [__($status)],

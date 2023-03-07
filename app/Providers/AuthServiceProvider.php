@@ -23,7 +23,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        /** @phpstan-ignore-next-line  */
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            /** @phpstan-ignore-next-line  */
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
 
