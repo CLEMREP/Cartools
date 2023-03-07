@@ -1,0 +1,16 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+
+    level: max
+
+    excludePaths:
+        - frontend/
+        - app/Exceptions/Handler.php
+
+    checkMissingIterableValueType: false
+
+    checkGenericClassInNonGenericObjectType: false
