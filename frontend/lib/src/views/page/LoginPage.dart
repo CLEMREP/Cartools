@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Services/http/QueryApi.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -100,7 +101,9 @@ class _LoginPageState extends State<LoginPage> {
               height: 30,
             ),
             ElevatedButton(
-              onPressed: () => print('ok'),
+              onPressed: () {
+                QueryApi.register();
+              },
               style: ElevatedButton.styleFrom(
                 primary: ColorManager.primary,
                 shape: RoundedRectangleBorder(
