@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/views/page/LoginPage.dart';
+import 'package:frontend/src/Views/page/HomePage.dart';
+import 'package:frontend/src/Views/page/LoginPage.dart';
+import 'package:frontend/src/Views/page/RegisterFirstPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const LoginPage(),
+        '/': (context) => const HomePage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterFirstPage(),
       },
     );
   }
