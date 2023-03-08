@@ -23,17 +23,47 @@ class _NavBarComponentState extends State<NavBarComponent> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.map,
-            color: selectedIndex == 0 ? ColorManager.thirdly : ColorManager.secondary,
-            size: 30,
+          GestureDetector(
+            child: Container(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.map,
+                    color: selectedIndex == 0 ? ColorManager.thirdly : ColorManager.thirdly50,
+                    size: 30,
+                  ),
+                ],
+              ),
+            ),
+            onTap: () {
+              setState(() {
+                selectedIndex = 0;
+              });
+            },
           ),
-          Icon(Icons.car_crash,
-            color: ColorManager.thirdly,
-            size: 30,
+          GestureDetector(
+            child: Icon(
+              Icons.car_crash,
+              color: selectedIndex == 1 ? ColorManager.thirdly : ColorManager.thirdly50,
+              size: 30,
+            ),
+            onTap: () {
+              setState(() {
+                selectedIndex = 1;
+              });
+            },
           ),
-          Icon(Icons.person,
-            color: ColorManager.thirdly,
-            size: 30,
+          GestureDetector(
+            child: Icon(
+              Icons.person,
+              color: selectedIndex == 2 ? ColorManager.thirdly : ColorManager.thirdly50,
+              size: 30,
+            ),
+            onTap: () {
+              setState(() {
+                selectedIndex = 2;
+              });
+            },
           ),
         ],
       ),

@@ -9,4 +9,5 @@ class ColorManager
   static const Color invisible = Color(0x00000000);
 
   static const Color secondary50 = Color(0x1123282D);
+  static const Color thirdly50 = Color(0x55FFFFFF);
 }
