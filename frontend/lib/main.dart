@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/Views/page/HomePage.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:frontend/src/Views/page/RegisterFirstPage.dart';
+import 'package:frontend/src/Views/page/RegisterSecondPage.dart';
 
 void main() {
   runApp(const MyApp());

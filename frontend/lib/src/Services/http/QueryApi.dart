@@ -10,20 +10,32 @@ class QueryApi
 
   QueryApi._internal();
 
-  static getCsrfToken() async
+  static Future<bool> register(String firstName, String lastName, String email, String password, String passwordConfirmation) async
   {
-    await http.get(Uri.parse('http://cartools.test/sanctum/csrf-cookie'));
+    final response = await http.post(Uri.parse('http://cartools.test/register'), body: {
+      'firstname': firstName,
+      'lastname': lastName,
+      'email': email,
+      'password': password,
+      'password_confirmation': passwordConfirmation,
+    });
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  static register() async
+  static Future<bool> login(String email, String password) async
   {
-    await getCsrfToken();
-    final response = await http.post(Uri.parse('http://cartools.test/register'), body: {
-      'firstname': 'zefzf',
-      'lastname': 'zefzf',
-      'email': 'zefzf@gmail.com',
-      'password': 'password',
+    final response = await http.post(Uri.parse('http://cartools.test/login'), body: {
+      'email': email,
+      'password': password,
     });
-    print(response.body);
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
