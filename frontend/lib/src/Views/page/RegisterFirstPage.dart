@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
+import 'package:frontend/src/Views/page/RegisterSecondPage.dart';
 
 class RegisterFirstPage extends StatefulWidget {
   const RegisterFirstPage({Key? key}) : super(key: key);
@@ -15,6 +16,9 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
   final password = TextEditingController();
   final passwordConfirmation = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  bool isPasswordVisible = false;
+  bool isPasswordConfirmationVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -105,29 +109,41 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                   ),
                   TextFormField(
                     controller: password,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
+                    obscureText: !isPasswordVisible,
+                    decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        child: Icon(
+                          isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          color: ColorManager.primary,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.all(10),
                       hintText: '**********',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.secondary50
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.primary
                         ),
                       ),
-                      errorBorder: OutlineInputBorder(
+                      errorBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.fourthly
                         ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
+                      focusedErrorBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.fourthly
@@ -156,29 +172,41 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                   ),
                   TextFormField(
                     controller: passwordConfirmation,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
+                    obscureText: !isPasswordConfirmationVisible,
+                    decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isPasswordConfirmationVisible = !isPasswordConfirmationVisible;
+                          });
+                        },
+                        child: Icon(
+                          isPasswordConfirmationVisible ? Icons.visibility : Icons.visibility_off,
+                          color: ColorManager.primary,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.all(10),
                       hintText: '**********',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.secondary50
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.primary
                         ),
                       ),
-                      errorBorder: OutlineInputBorder(
+                      errorBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.fourthly
                         ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
+                      focusedErrorBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: ColorManager.fourthly
@@ -203,10 +231,14 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    print(email.text);
-                    print(password.text);
-                    print(passwordConfirmation.text);
-                    Navigator.pushNamed(context, '/registerSecond');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterSecondPage(
+                          email: email.text,
+                          password: password.text,
+                          passwordConfirmation: passwordConfirmation.text),
+                      ),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -273,7 +305,7 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Icon(Icons.icecream,
+                    Icon(Icons.g_mobiledata,
                       color: ColorManager.secondary,
                     ),
                     SizedBox(

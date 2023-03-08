@@ -10,22 +10,32 @@ class QueryApi
 
   QueryApi._internal();
 
-  static register(String firstName, String lastName, String email, String password) async
+  static Future<bool> register(String firstName, String lastName, String email, String password, String passwordConfirmation) async
   {
-    await http.post(Uri.parse('http://cartools.test/register'), body: {
-      'firstname': 'zefzf',
-      'lastname': 'zefzf',
-      'email': 'zefzf@gmail.com',
-      'password': 'password',
-      'password_confirmation': 'password',
+    final response = await http.post(Uri.parse('http://cartools.test/register'), body: {
+      'firstname': firstName,
+      'lastname': lastName,
+      'email': email,
+      'password': password,
+      'password_confirmation': passwordConfirmation,
     });
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  static login(String email, String password) async
+  static Future<bool> login(String email, String password) async
   {
     final response = await http.post(Uri.parse('http://cartools.test/login'), body: {
-      'email': 'zefzf@gmail.com',
-      'password': 'password',
+      'email': email,
+      'password': password,
     });
+    if (response.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

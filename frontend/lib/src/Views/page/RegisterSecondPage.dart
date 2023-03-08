@@ -3,7 +3,12 @@ import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
 
 class RegisterSecondPage extends StatefulWidget {
-  const RegisterSecondPage({Key? key}) : super(key: key);
+
+  final String email;
+  final String password;
+  final String passwordConfirmation;
+
+  const RegisterSecondPage({Key? key, required this.email, required this.password, required this.passwordConfirmation}) : super(key: key);
 
   @override
   State<RegisterSecondPage> createState() => _RegisterSecondPageState();
@@ -146,10 +151,25 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
                 height: 30,
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    print(firstName.text);
-                    print(lastName.text);
+                    bool response = await QueryApi.register(
+                        firstName.text,
+                        lastName.text,
+                        widget.email,
+                        widget.password,
+                        widget.passwordConfirmation
+                    );
+                    if (response) {
+                      Navigator.pushNamed(context, '/');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Une erreur est survenue'),
+                          backgroundColor: ColorManager.fourthly,
+                        ),
+                      );
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
