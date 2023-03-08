@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Views/page/CarburantPage.dart';
 import 'package:frontend/src/Views/page/HomePage.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:frontend/src/Views/page/RegisterFirstPage.dart';
 import 'package:frontend/src/Views/page/RegisterSecondPage.dart';
+import 'package:frontend/src/Views/page/RegisterVehiculePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +18,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/login',
+      initialRoute: '/carburant',
       routes: {
         '/': (context) => const HomePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterFirstPage(),
+        '/register/vehicule': (context) => const RegisterVehiculePage(),
+        '/carburant': (context) => const CarburantPage(),
       },
     );
   }
