@@ -167,3 +167,6 @@ coverage/
 
 # Symbols
 app.*.symbols
+
+**/.idea/
+**/.dart_tool/
