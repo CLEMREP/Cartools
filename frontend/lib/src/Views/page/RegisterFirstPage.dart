@@ -16,6 +16,8 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
   final password = TextEditingController();
   final passwordConfirmation = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _passwordKey = GlobalKey<FormFieldState>();
+  final _emailKey = GlobalKey<FormFieldState>();
 
   bool isPasswordVisible = false;
   bool isPasswordConfirmationVisible = false;
@@ -88,9 +90,17 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                         ),
                       ),
                     ),
+                    key: _emailKey,
+                    onChanged: (value) {
+                      _emailKey.currentState!.validate();
+                    },
                     validator: (value) {
+                      RegExp regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+                      if (!regex.hasMatch(value!)) {
+                        return 'Votre e-mail n\'est pas au bon format.';
+                      }
                       if (value == null || value.isEmpty) {
-                        return 'Veuillez renseigner votre adresse mail';
+                        return 'Veuillez renseigner votre e-mail.';
                       }
                       return null;
                     },
@@ -150,8 +160,15 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                         ),
                       ),
                     ),
-                    onChanged: null,
+                    key: _passwordKey,
+                    onChanged: (value) {
+                      _passwordKey.currentState!.validate();
+                    },
                     validator: (value) {
+                      RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                      if (!regex.hasMatch(value!)) {
+                        return 'Il faut au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial';
+                      }
                       if (value == null || value.isEmpty) {
                         return 'Veuillez renseigner un mot de passe';
                       }
@@ -215,7 +232,7 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Veuillez remplir ce champ';
+                        return 'Merci de remplir le champ.';
                       }
                       if (value != password.text) {
                         return 'Les mots de passe ne correspondent pas';
