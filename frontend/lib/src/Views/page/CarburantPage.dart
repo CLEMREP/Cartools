@@ -34,8 +34,6 @@ class _CarburantPageState extends State<CarburantPage> {
                     : const BetweenPlaceComponent();
               },
             ),
-            Spacer(),
-            const NavBarComponent(),
           ],
         )
       ),

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 
 class NavBarComponent extends StatefulWidget {
-  const NavBarComponent({Key? key}) : super(key: key);
+
+  final PageController controller;
+
+  const NavBarComponent({Key? key, required PageController this.controller}) : super(key: key);
 
   @override
   State<NavBarComponent> createState() => _NavBarComponentState();
@@ -15,55 +18,107 @@ class _NavBarComponentState extends State<NavBarComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+      height: 80,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
       decoration: BoxDecoration(
         color: ColorManager.secondary,
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GestureDetector(
-            child: Container(
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.map,
-                    color: selectedIndex == 0 ? ColorManager.thirdly : ColorManager.thirdly50,
-                    size: 30,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.map,
+                        color: selectedIndex == 0 ? ColorManager.thirdly : ColorManager.thirdly50,
+                        size: 30,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: 5,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: selectedIndex == 0 ? ColorManager.primary : ColorManager.invisible,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                },
               ),
-            ),
-            onTap: () {
-              setState(() {
-                selectedIndex = 0;
-              });
-            },
-          ),
-          GestureDetector(
-            child: Icon(
-              Icons.car_crash,
-              color: selectedIndex == 1 ? ColorManager.thirdly : ColorManager.thirdly50,
-              size: 30,
-            ),
-            onTap: () {
-              setState(() {
-                selectedIndex = 1;
-              });
-            },
-          ),
-          GestureDetector(
-            child: Icon(
-              Icons.person,
-              color: selectedIndex == 2 ? ColorManager.thirdly : ColorManager.thirdly50,
-              size: 30,
-            ),
-            onTap: () {
-              setState(() {
-                selectedIndex = 2;
-              });
-            },
+              GestureDetector(
+                child: Container(
+                  child: Column(
+                      children: [
+                        Icon(
+                          Icons.car_crash,
+                          color: selectedIndex == 1 ? ColorManager.thirdly : ColorManager.thirdly50,
+                          size: 30,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: selectedIndex == 1 ? ColorManager.primary : ColorManager.invisible,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ]
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 1;
+                  });
+                },
+              ),
+              GestureDetector(
+                child: Container(
+                  child: Column(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: selectedIndex == 2 ? ColorManager.thirdly : ColorManager.thirdly50,
+                          size: 30,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          width: 5,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: selectedIndex == 2 ? ColorManager.primary : ColorManager.invisible,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ]
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+                },
+              ),
+            ],
           ),
         ],
       ),
