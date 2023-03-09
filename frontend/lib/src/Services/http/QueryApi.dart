@@ -12,7 +12,7 @@ class QueryApi
 
   static Future<bool> register(String firstName, String lastName, String email, String password, String passwordConfirmation) async
   {
-    final response = await http.post(Uri.parse('http://cartools.test/register'), body: {
+    final response = await http.post(Uri.parse('http://cartools.test/api/register'), body: {
       'firstname': firstName,
       'lastname': lastName,
       'email': email,
@@ -28,7 +28,7 @@ class QueryApi
 
   static Future<bool> login(String email, String password) async
   {
-    final response = await http.post(Uri.parse('http://cartools.test/login'), body: {
+    final response = await http.post(Uri.parse('http://cartools.test/api/login'), body: {
       'email': email,
       'password': password,
     });
