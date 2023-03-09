@@ -14,13 +14,13 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
         child: Column(
           children: [
             const SizedBox(
               height: 50,
             ),
             Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -69,17 +69,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
             Container(
-              child: Image.asset('assets/images/car.png'),
+              color: Colors.red,
+              height: 200,
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 0,
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
+            // Image.asset('assets/images/car.png'),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

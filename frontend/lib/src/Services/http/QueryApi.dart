@@ -19,7 +19,7 @@ class QueryApi
       'password': password,
       'password_confirmation': passwordConfirmation,
     });
-    if (response.statusCode == 204) {
+    if (response.statusCode == 201) {
       return true;
     } else {
       return false;
