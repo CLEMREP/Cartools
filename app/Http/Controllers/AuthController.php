@@ -33,8 +33,9 @@ class AuthController extends Controller
 
         $response = [
             'user' => $user,
-            'token' => $token
+            'token' => $token,
         ];
+
         return response($response, 201);
     }
 
@@ -42,16 +43,16 @@ class AuthController extends Controller
     {
         $fields = $request->validate([
             'email' => 'required|string',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         // Check email
         $user = User::where('email', $fields['email'])->first();
 
         // Check password
-        if(!$user || !Hash::check($fields['password'], $user->password)) {
+        if (! $user || ! Hash::check($fields['password'], $user->password)) {
             return response([
-                'message' => 'Les informations ne sont pas correctes.'
+                'message' => 'Les informations ne sont pas correctes.',
             ], 401);
         }
 
@@ -59,7 +60,7 @@ class AuthController extends Controller
 
         $response = [
             'user' => $user,
-            'token' => $token
+            'token' => $token,
         ];
 
         return response($response, 201);
@@ -67,10 +68,10 @@ class AuthController extends Controller
 
     public function logout(Request $request): array
     {
-        auth()->user()->tokens()->delete();
+        auth()->user()?->tokens()->delete();
 
         return [
-            'message' => 'Déconnexion réussie.'
+            'message' => 'Déconnexion réussie.',
         ];
     }
 }
