@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Services/http/QueryApi.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,16 +37,15 @@ class _SettingsPageState extends State<SettingsPage> {
             const Spacer(),
             GestureDetector(
               onTap: () async {
-
-                final prefs = await SharedPreferences.getInstance();
-                prefs.remove('token');
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
+                bool response = await QueryApi.logout();
+                if (response) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
                       builder: (context) => const LoginPage(),
-                  ),
-                );
+                    ),
+                  );
+                }
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),

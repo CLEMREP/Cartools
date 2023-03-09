@@ -51,4 +51,21 @@ class QueryApi
       return false;
     }
   }
+
+  static Future<bool> logout() async
+  {
+    final response = await http.post(Uri.parse('http://cartools.test/api/logout'),
+      headers: {
+        'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
+      },);
+    if (response.statusCode == 200) {
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove('token');
+
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
