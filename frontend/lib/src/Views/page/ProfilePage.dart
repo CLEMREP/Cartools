@@ -17,16 +17,15 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: [
             const SizedBox(
-              height: 50,
+              height: 70,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: const [
                         Text(
                           'Peugeot',
@@ -36,16 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               color: ColorManager.secondary
                           ),
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '308 SW',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: ColorManager.secondary
-                          ),
-                        ),
+                        Icon(Icons.arrow_drop_down),
                       ],
                     ),
                   ),
@@ -69,25 +59,43 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 4,
+            ),
             Container(
-              color: Colors.red,
-              height: 200,
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: 0,
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      color: Colors.green,
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Row(
+                children: const [
+                  Text(
+                    '308 SW',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: ColorManager.secondary
                     ),
                   ),
                 ],
               ),
             ),
-            // Image.asset('assets/images/car.png'),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+              height: 300,
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: -100,
+                    child: Container(
+                      width: 525,
+                      height: 300,
+                      child: Image.asset('assets/images/car.png'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
