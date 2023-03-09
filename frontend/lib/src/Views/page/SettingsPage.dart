@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -34,7 +35,11 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const Spacer(),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
+
+                final prefs = await SharedPreferences.getInstance();
+                prefs.remove('token');
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(

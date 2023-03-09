@@ -5,14 +5,19 @@ import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:frontend/src/Views/page/RegisterFirstPage.dart';
 import 'package:frontend/src/Views/page/RegisterSecondPage.dart';
 import 'package:frontend/src/Views/page/RegisterVehiculePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString('token');
+  runApp(MyApp(token: token));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? token;
 
+  const MyApp({super.key, this.token});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => token == null ? const LoginPage() : const HomePage(),
+        '/home': (context) => const HomePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterFirstPage(),
         '/register/vehicule': (context) => const RegisterVehiculePage(),

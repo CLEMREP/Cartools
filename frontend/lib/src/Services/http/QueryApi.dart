@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QueryApi
 {
@@ -20,6 +21,12 @@ class QueryApi
       'password_confirmation': passwordConfirmation,
     });
     if (response.statusCode == 201) {
+
+      var token = json.decode(response.body)['token'];
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', token);
+
       return true;
     } else {
       return false;
@@ -32,7 +39,13 @@ class QueryApi
       'email': email,
       'password': password,
     });
-    if (response.statusCode == 204) {
+    if (response.statusCode == 200) {
+
+      var token = json.decode(response.body)['token'];
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', token);
+
       return true;
     } else {
       return false;

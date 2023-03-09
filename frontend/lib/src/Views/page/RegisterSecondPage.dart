@@ -161,7 +161,7 @@ class _RegisterSecondPageState extends State<RegisterSecondPage> {
                         widget.passwordConfirmation
                     );
                     if (response) {
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushNamed(context, '/home');
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
