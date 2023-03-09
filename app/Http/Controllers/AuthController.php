@@ -2,32 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
-    public function register(Request $request): Response
+    public function __construct(
+        private readonly UserRepository $userRepository,
+    ) {
+    }
+
+    public function register(RegisterRequest $request): Response
     {
-        $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        /** @var array $data */
+        $data = $request->validated();
 
-        /** @var string $password */
-        $password = $request->password;
+        $data['password'] = Hash::make($data['password']);
 
-        $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'password' => Hash::make($password),
-        ]);
+        $user = $this->userRepository->create($data);
 
         $token = $user->createToken('Cartools')->plainTextToken;
 
@@ -39,18 +35,14 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    public function login(Request $request): Response
+    public function login(LoginRequest $request): Response
     {
-        $fields = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        /** @var array $data */
+        $data = $request->validated();
 
-        // Check email
-        $user = User::where('email', $fields['email'])->first();
+        $user = $this->userRepository->checkEmail($data['email']);
 
-        // Check password
-        if (! $user || ! Hash::check($fields['password'], $user->password)) {
+        if (! $user || ! Hash::check($data['password'], $user->password)) {
             return response([
                 'message' => 'Les informations ne sont pas correctes.',
             ], 401);
@@ -63,7 +55,7 @@ class AuthController extends Controller
             'token' => $token,
         ];
 
-        return response($response, 201);
+        return response($response, 200);
     }
 
     public function logout(Request $request): array

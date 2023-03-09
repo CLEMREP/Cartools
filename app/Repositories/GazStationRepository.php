@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class GazStationRepository
 {
     public function __construct(
-        private readonly GazStation $gazStation
+        private readonly GazStation $model
     ) {
     }
 
@@ -17,6 +17,6 @@ class GazStationRepository
      */
     public function getGazStations(): Collection
     {
-        return $this->gazStation->with('prices')->get();
+        return $this->model->with('prices')->get();
     }
 }
