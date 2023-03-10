@@ -18,7 +18,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final PageController controller = PageController();
+    final PageController controller = PageController(
+      initialPage: 1,
+    );
 
     return Scaffold(
       body: PageView(

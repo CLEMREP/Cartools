@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
+import 'package:frontend/src/Views/component/settings/MoreInformationAndSupportComponent.dart';
+import 'package:frontend/src/Views/component/settings/YourAccountComponent.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,26 +26,48 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             Container(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const Icon(Icons.arrow_back),
-                  )
+                    child: const Icon(Icons.chevron_left,
+                      size: 36,
+                      color: ColorManager.secondary,
+                    ),
+                  ),
+                  Text('Settings',
+                    style: TextStyle(
+                      color: ColorManager.secondary,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(),
                 ],
               ),
             ),
+            const SizedBox(
+              height: 50,
+            ),
+            const YourAccountComponent(),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 25),
+              height: 2,
+              color: ColorManager.secondary50,
+            ),
+            const MoreInformationAndSupportComponent(),
             const Spacer(),
             GestureDetector(
               onTap: () async {
                 bool response = await QueryApi.logout();
                 if (response) {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const LoginPage(),
                     ),
+                    (route) => false,
                   );
                 }
               },

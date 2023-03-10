@@ -5,7 +5,7 @@ class NavBarComponent extends StatefulWidget {
 
   final PageController controller;
 
-  static int selectedIndex = 0;
+  static int selectedIndex = 1;
 
   const NavBarComponent({Key? key, required PageController this.controller}) : super(key: key);
 
@@ -18,7 +18,7 @@ class _NavBarComponentState extends State<NavBarComponent> {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      margin: const EdgeInsets.only(top: 25, bottom: 25, left: 25, right: 25),
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
       decoration: BoxDecoration(
         color: ColorManager.secondary,
@@ -55,7 +55,6 @@ class _NavBarComponentState extends State<NavBarComponent> {
                 ),
                 onTap: () {
                   setState(() {
-                    NavBarComponent.selectedIndex = 0;
                     widget.controller.animateToPage(
                       0,
                       duration: const Duration(milliseconds: 400),
@@ -89,7 +88,6 @@ class _NavBarComponentState extends State<NavBarComponent> {
                 ),
                 onTap: () {
                   setState(() {
-                    NavBarComponent.selectedIndex = 1;
                     widget.controller.animateToPage(
                       1,
                       duration: const Duration(milliseconds: 400),
@@ -123,7 +121,6 @@ class _NavBarComponentState extends State<NavBarComponent> {
                 ),
                 onTap: () {
                   setState(() {
-                    NavBarComponent.selectedIndex = 2;
                     widget.controller.animateToPage(
                       2,
                       duration: const Duration(milliseconds: 400),
