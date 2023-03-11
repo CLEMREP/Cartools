@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
+import 'package:frontend/src/Views/component/NavBarComponent.dart';
 import 'package:frontend/src/Views/component/settings/MoreInformationAndSupportComponent.dart';
 import 'package:frontend/src/Views/component/settings/YourAccountComponent.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
@@ -62,6 +63,9 @@ class _SettingsPageState extends State<SettingsPage> {
               onTap: () async {
                 bool response = await QueryApi.logout();
                 if (response) {
+
+                  NavBarComponent.selectedIndex = 1;
+
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
