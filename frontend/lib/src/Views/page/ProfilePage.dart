@@ -271,6 +271,79 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                     ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 130,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2,
+                                  color: ColorManager.secondary
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.ev_station,
+                                  size: 40,
+                                  color: ColorManager.primary,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  '60 L',
+                                  style: TextStyle(
+                                    color: ColorManager.secondary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: 130,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2,
+                                  color: ColorManager.secondary
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.discount,
+                                  size: 40,
+                                  color: ColorManager.primary,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  '6 L / 100',
+                                  style: TextStyle(
+                                    color: ColorManager.secondary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

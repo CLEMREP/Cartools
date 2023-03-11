@@ -18,7 +18,7 @@ class _NavBarComponentState extends State<NavBarComponent> {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      margin: const EdgeInsets.only(top: 25, bottom: 25, left: 25, right: 25),
+      margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
       decoration: BoxDecoration(
         color: ColorManager.secondary,

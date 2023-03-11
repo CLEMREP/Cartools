@@ -36,7 +36,8 @@ class _HomePageState extends State<HomePage> {
           ProfilePage(),
         ],
       ),
-      bottomNavigationBar: NavBarComponent(controller: controller),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: NavBarComponent(controller: controller),
     );
   }
 }

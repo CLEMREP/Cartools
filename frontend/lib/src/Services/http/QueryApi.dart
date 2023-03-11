@@ -68,4 +68,20 @@ class QueryApi
       return false;
     }
   }
+
+  static Future<bool> getUser() async
+  {
+    final response = await http.get(Uri.parse('http://cartools.test/api/user'),
+      headers: {
+        'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
+      },);
+    if (response.statusCode == 200) {
+
+      var data = json.decode(response.body);
+
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

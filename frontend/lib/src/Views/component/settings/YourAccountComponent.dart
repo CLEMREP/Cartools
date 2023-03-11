@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Services/http/QueryApi.dart';
 
 class YourAccountComponent extends StatefulWidget {
   const YourAccountComponent({Key? key}) : super(key: key);
@@ -45,25 +46,30 @@ class _YourAccountComponentState extends State<YourAccountComponent> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('Accounts Center',
-                              style: TextStyle(
-                                color: ColorManager.secondary,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
+                      GestureDetector(
+                        onTap: () async {
+                          bool response = await QueryApi.getUser();
+                        },
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('Accounts Center',
+                                style: TextStyle(
+                                  color: ColorManager.secondary,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                ),
                               ),
-                            ),
-                            Text('Password, security, personal details, ads',
-                              style: TextStyle(
-                                color: ColorManager.secondary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w300,
+                              Text('Password, security, personal details, ads',
+                                style: TextStyle(
+                                  color: ColorManager.secondary,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Services/http/QueryApi.dart';
 import 'package:frontend/src/Views/page/CarburantPage.dart';
 import 'package:frontend/src/Views/page/HomePage.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
@@ -9,8 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   final prefs = await SharedPreferences.getInstance();
   var token = prefs.getString('token');
+
+  bool response = await QueryApi.getUser();
+
   runApp(MyApp(token: token));
 }
 
