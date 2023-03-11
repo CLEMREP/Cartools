@@ -157,6 +157,8 @@ class _LoginPageState extends State<LoginPage> {
 
                         bool response = await QueryApi.getUser();
 
+                        bool response2 = await QueryApi.getGazStations();
+
                         NavBarComponent.selectedIndex = 1;
                         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
 
