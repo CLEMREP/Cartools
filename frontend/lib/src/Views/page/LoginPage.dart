@@ -154,8 +154,12 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState!.validate()) {
                       bool response = await QueryApi.login(email.text, password.text);
                       if (response) {
+
+                        bool response = await QueryApi.getUser();
+
                         NavBarComponent.selectedIndex = 1;
                         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -294,7 +298,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/register');
+                          Navigator.pushNamedAndRemoveUntil(context, '/register', (route) => false);
                         },
                         child:
                         const Text('S\'enregistrer',

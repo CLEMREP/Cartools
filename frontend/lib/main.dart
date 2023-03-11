@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Db/model/User.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
 import 'package:frontend/src/Views/page/CarburantPage.dart';
 import 'package:frontend/src/Views/page/HomePage.dart';
@@ -14,7 +15,11 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   var token = prefs.getString('token');
 
-  bool response = await QueryApi.getUser();
+  if(token != null) {
+    bool response = await QueryApi.getUser();
+
+    bool response2 = await QueryApi.getGazStations();
+  }
 
   runApp(MyApp(token: token));
 }
@@ -30,8 +35,18 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
-        '/': (context) => token == null ? const LoginPage() : const HomePage(),
-        '/home': (context) => const HomePage(),
+        '/': (context) {
+          if(token == null) {
+            return const LoginPage();
+          } else {
+            if(User.vehicule != null) {
+              return const HomePage();
+            } else {
+              return const RegisterVehiculePage();
+            }
+          }
+        },
+        '/home': (context) => User.vehicule != null ? const HomePage() : const RegisterVehiculePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterFirstPage(),
         '/register/vehicule': (context) => const RegisterVehiculePage(),

@@ -387,7 +387,7 @@ class _RegisterFirstPageState extends State<RegisterFirstPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/login');
+                          Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                         },
                         child:
                         const Text('Se connecter',

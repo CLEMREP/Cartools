@@ -48,7 +48,6 @@ class _YourAccountComponentState extends State<YourAccountComponent> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          bool response = await QueryApi.getUser();
                         },
                         child: Container(
                           child: Column(

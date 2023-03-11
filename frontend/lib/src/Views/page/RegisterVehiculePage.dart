@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Db/model/User.dart';
+import 'package:frontend/src/Db/model/Vehicule.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterVehiculePage extends StatefulWidget {
   const RegisterVehiculePage({Key? key}) : super(key: key);
@@ -355,6 +358,19 @@ class _RegisterVehiculePageState extends State<RegisterVehiculePage> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
+
+                    Vehicule.brand = selectedMarque.text;
+                    Vehicule.model = selectedModele.text;
+                    Vehicule.reservoir = int.parse(reservoir.text);
+                    Vehicule.consumption = double.parse(consommation.text);
+
+                    User.vehicule = Vehicule();
+
+                    bool response = await QueryApi.setVehicule();
+                    if (response) {
+                      print('ok good');
+                      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -389,8 +405,11 @@ class _RegisterVehiculePageState extends State<RegisterVehiculePage> {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.remove('token');
+
+                        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                       },
                       child:
                       const Text('Retour',

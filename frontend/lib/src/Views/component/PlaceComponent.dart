@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Db/model/GazStation.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 
 class PlaceComponent extends StatefulWidget {
-  const PlaceComponent({Key? key}) : super(key: key);
+  final GazStation gazStation;
+
+  const PlaceComponent({Key? key, required this.gazStation}) : super(key: key);
 
   @override
   State<PlaceComponent> createState() => _PlaceComponentState();
@@ -36,14 +39,17 @@ class _PlaceComponentState extends State<PlaceComponent> {
                 width: 10,
               ),
               Container(
+                width: 200,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('TOTAL BD DU TERTRE',
-                      style: TextStyle(
+                    Text(
+                      widget.gazStation.address,
+                      style: const TextStyle(
                         color: ColorManager.secondary,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const SizedBox(

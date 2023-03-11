@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Services/http/QueryApi.dart';
 
 class ChoiceComponent extends StatefulWidget {
   const ChoiceComponent({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
                   ),
                 ),
               ),
-              onTap: () {
+              onTap: () async {
                 setState(() {
                   selectedIndex = 0;
                 });
