@@ -67,6 +67,8 @@ class QueryApi
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('token');
 
+      User.vehicule = null;
+
       return true;
     } else {
       return false;
