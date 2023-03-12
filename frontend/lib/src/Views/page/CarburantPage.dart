@@ -17,21 +17,21 @@ class CarburantPage extends StatefulWidget {
 class _CarburantPageState extends State<CarburantPage> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: GazStationRepository.getStationsZone(20),
-      builder: (context, AsyncSnapshot<List<GazStation>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Scaffold(
-            body: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    ChoiceComponent(),
-                    Expanded(
-                      child: ListView.builder(
+    return Scaffold(
+      body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              const ChoiceComponent(),
+              Expanded(
+                child: FutureBuilder<List<GazStation>>(
+                  future: GazStationRepository.getStationsZone(20),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
                         padding: const EdgeInsets.only(top: 20, bottom: 20),
                         shrinkWrap: true,
                         //itemCount: GazStationRepository.gazStations.length * 2, // 10 alors 5 car 10 / 2 = 5 | 11 alors 6 car 11 / 2 = 5.5 donc 6
@@ -42,20 +42,28 @@ class _CarburantPageState extends State<CarburantPage> {
                               ? PlaceComponent(gazStation: snapshot.data![index ~/ 2])
                               : const BetweenPlaceComponent();
                         },
-                      ),
-                    ),
-                  ],
-                )
-            ),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: ColorManager.primary,
-            ),
-          );
-        }
-      },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          snapshot.error.toString(),
+                          style: TextStyle(
+                            color: ColorManager.secondary,
+                            fontSize: 14,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          )
+      ),
     );
   }
 }

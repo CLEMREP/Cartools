@@ -368,7 +368,6 @@ class _RegisterVehiculePageState extends State<RegisterVehiculePage> {
 
                     bool response = await QueryApi.setVehicule();
                     if (response) {
-                      print('ok good');
                       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                     }
                   }
