@@ -1,4 +1,6 @@
 import 'package:frontend/src/Db/model/GazStation.dart';
+import 'package:frontend/src/Services/GeolocatorPosition.dart';
+import 'package:geolocator/geolocator.dart';
 
 class GazStationRepository
 {
@@ -15,12 +17,17 @@ class GazStationRepository
     gazStations.add(gazStation);
   }
 
-  static List<GazStation> getStationsZone(double zone)
+  static Future<List<GazStation>> getStationsZone(double zone) async
   {
     List<GazStation> stations = [];
 
+    Position position = await GeolocatorPosition.determinePosition();
+
     for(GazStation gazStation in gazStations) {
-      // faire le système de zone
+      double distance = Geolocator.distanceBetween(position.latitude, position.longitude, gazStation.latitude, gazStation.longitude);
+      if (distance / 1000 <= zone) {
+        stations.add(gazStation);
+      }
     }
 
     return stations;

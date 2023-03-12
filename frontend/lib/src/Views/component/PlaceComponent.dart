@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Db/model/GazStation.dart';
+import 'package:frontend/src/Db/repository/GazStationRepository.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 
 class PlaceComponent extends StatefulWidget {
@@ -14,6 +15,13 @@ class PlaceComponent extends StatefulWidget {
 class _PlaceComponentState extends State<PlaceComponent> {
   @override
   Widget build(BuildContext context) {
+
+    widget.gazStation.gazPrices.forEach((element) {
+      if (element.fuelType == 'SP95') {
+        print(element.price);
+      }
+    });
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
@@ -57,24 +65,25 @@ class _PlaceComponentState extends State<PlaceComponent> {
                     ),
                     Container(
                       child: Row(
-                          children: const [
-                            Text('SP95:',
-                              style: TextStyle(
-                                color: ColorManager.secondary,
-                                fontSize: 14,
-                              ),
+                        children: [
+                          const Text('SP95:',
+                            style: TextStyle(
+                              color: ColorManager.secondary,
+                              fontSize: 14,
                             ),
-                            SizedBox(
-                              width: 8,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            widget.gazStation.gazPrices.length > 0 ? widget.gazStation.gazPrices.first.price.toString() + '€' : 'N/A',
+                            style: const TextStyle(
+                              color: ColorManager.primary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
                             ),
-                            Text('1,865€',
-                              style: TextStyle(
-                                color: ColorManager.primary,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ]
+                          ),
+                        ]
                       ),
                     ),
                   ],

@@ -1,12 +1,15 @@
+import 'package:frontend/src/Db/model/GazPrice.dart';
+
 class GazStation
 {
   int stationId;
-  int latitude;
-  int longitude;
+  double latitude;
+  double longitude;
   String postalCode;
   String city;
   String address;
   String pop;
+  List<GazPrice> gazPrices = [];
 
   GazStation({
     required this.stationId,
@@ -21,8 +24,8 @@ class GazStation
   factory GazStation.fromJson(Map<String, dynamic> json) {
     return GazStation(
       stationId: json['station_id'],
-      latitude: int.parse(json['latitude'].toString()),
-      longitude: json['longitude'],
+      latitude: double.parse(json['latitude'].toString()) / 100000,
+      longitude: double.parse(json['longitude'].toString()) / 100000,
       postalCode: json['postal_code'],
       city: json['city'],
       address: json['address'],

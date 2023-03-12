@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Db/model/GazStation.dart';
 import 'package:frontend/src/Db/repository/GazStationRepository.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Views/component/BetweenPlaceComponent.dart';
@@ -16,30 +17,45 @@ class CarburantPage extends StatefulWidget {
 class _CarburantPageState extends State<CarburantPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50,
+    return FutureBuilder(
+      future: GazStationRepository.getStationsZone(20),
+      builder: (context, AsyncSnapshot<List<GazStation>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Scaffold(
+            body: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    ChoiceComponent(),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(top: 20, bottom: 20),
+                        shrinkWrap: true,
+                        //itemCount: GazStationRepository.gazStations.length * 2, // 10 alors 5 car 10 / 2 = 5 | 11 alors 6 car 11 / 2 = 5.5 donc 6
+                        itemCount: snapshot.data!.length * 2,
+                        itemBuilder: (context, index) {
+                          return (index % 2 == 0)
+                              //? PlaceComponent(gazStation: GazStationRepository.gazStations[index ~/ 2])
+                              ? PlaceComponent(gazStation: snapshot.data![index ~/ 2])
+                              : const BetweenPlaceComponent();
+                        },
+                      ),
+                    ),
+                  ],
+                )
             ),
-            ChoiceComponent(),
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                shrinkWrap: true,
-                itemCount: GazStationRepository.gazStations.length * 2, // 10 alors 5 car 10 / 2 = 5 | 11 alors 6 car 11 / 2 = 5.5 donc 6
-                itemBuilder: (context, index) {
-                  return (index % 2 == 0)
-                      ? PlaceComponent(gazStation: GazStationRepository.gazStations[index ~/ 2])
-                      : const BetweenPlaceComponent();
-                },
-              ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: ColorManager.primary,
             ),
-          ],
-        )
-      ),
+          );
+        }
+      },
     );
   }
 }

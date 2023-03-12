@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:frontend/src/Db/model/GazPrice.dart';
 import 'package:frontend/src/Db/model/GazStation.dart';
 import 'package:frontend/src/Db/model/User.dart';
 import 'package:frontend/src/Db/model/Vehicule.dart';
+import 'package:frontend/src/Db/repository/GazPriceRepository.dart';
 import 'package:frontend/src/Db/repository/GazStationRepository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,23 +114,6 @@ class QueryApi
     }
   }
 
-  static Future<bool> getVehicule() async
-  {
-    final response = await http.get(Uri.parse('http://cartools.test/api/car'),
-      headers: {
-        'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
-      },);
-    if (response.statusCode == 200) {
-
-      var data = json.decode(response.body);
-      User.vehicule = Vehicule.fromJson(data);
-
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   static Future<bool> getGazStations() async
   {
     final response = await http.get(Uri.parse('http://cartools.test/api/gaz-stations'),
@@ -140,7 +125,13 @@ class QueryApi
       var data = json.decode(response.body);
       GazStationRepository.gazStations.clear();
       for (var gazStation in data['data']) {
-        GazStationRepository.gazStations.add(GazStation.fromJson(gazStation));
+        GazStation gazStationModel = GazStation.fromJson(gazStation);
+        for (var gazPrice in gazStation['prices']) {
+          GazPrice gazPriceModel = GazPrice.fromJson(gazPrice, gazStationModel);
+          GazPriceRepository.gazPrices.add(gazPriceModel);
+          gazStationModel.gazPrices.add(gazPriceModel);
+        }
+        GazStationRepository.gazStations.add(gazStationModel);
       }
 
       return true;
