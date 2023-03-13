@@ -38,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: ColorManager.secondary,
                     ),
                   ),
-                  Text('Settings',
+                  const Text('Paramètres',
                     style: TextStyle(
                       color: ColorManager.secondary,
                       fontSize: 16,

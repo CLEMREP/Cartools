@@ -19,7 +19,7 @@ class _YourAccountComponentState extends State<YourAccountComponent> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text('Your account',
+                Text('Votre compte',
                   style: TextStyle(
                     color: ColorManager.secondary,
                     fontWeight: FontWeight.w300,
@@ -50,21 +50,23 @@ class _YourAccountComponentState extends State<YourAccountComponent> {
                         onTap: () async {
                         },
                         child: Container(
+                          width: 200,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
-                              Text('Accounts Center',
+                              Text('Centre de compte',
                                 style: TextStyle(
                                   color: ColorManager.secondary,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
                               ),
-                              Text('Password, security, personal details, ads',
+                              Text('Mot de passe, sécurité, détails personnel, publicités',
                                 style: TextStyle(
                                   color: ColorManager.secondary,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w300,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],

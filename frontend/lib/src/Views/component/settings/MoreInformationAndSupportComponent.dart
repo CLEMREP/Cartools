@@ -18,7 +18,7 @@ class _MoreInformationAndSupportComponentState extends State<MoreInformationAndS
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text('More information and support',
+                Text('Informations suplémentaire et support',
                   style: TextStyle(
                     color: ColorManager.secondary,
                     fontWeight: FontWeight.w300,
@@ -49,7 +49,7 @@ class _MoreInformationAndSupportComponentState extends State<MoreInformationAndS
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text('Help',
+                            Text('Aide',
                               style: TextStyle(
                                 color: ColorManager.secondary,
                                 fontWeight: FontWeight.w500,
@@ -90,7 +90,7 @@ class _MoreInformationAndSupportComponentState extends State<MoreInformationAndS
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text('About',
+                            Text('À propos',
                               style: TextStyle(
                                 color: ColorManager.secondary,
                                 fontWeight: FontWeight.w500,
