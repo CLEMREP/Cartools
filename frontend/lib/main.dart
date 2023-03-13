@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Db/model/User.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
-import 'package:frontend/src/Views/page/CarburantPage.dart';
+import 'package:frontend/src/Views/page/StationPage.dart';
 import 'package:frontend/src/Views/page/HomePage.dart';
 import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:frontend/src/Views/page/RegisterFirstPage.dart';
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterFirstPage(),
         '/register/vehicule': (context) => const RegisterVehiculePage(),
-        '/carburant': (context) => const CarburantPage(),
+        '/carburant': (context) => const StationPage(),
       },
     );
   }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Services/GlobalState.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
 
 class ChoiceComponent extends StatefulWidget {
-  const ChoiceComponent({Key? key}) : super(key: key);
+
+  final PageController controller;
+
+  static int selectedIndexChoiceComponent = 0;
+
+  const ChoiceComponent({Key? key, required PageController this.controller}) : super(key: key);
 
   @override
   State<ChoiceComponent> createState() => _ChoiceComponentState();
 }
 
 class _ChoiceComponentState extends State<ChoiceComponent> {
-
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +34,7 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: selectedIndex == 0 ? ColorManager.primary : ColorManager.invisible,
+                  color: ChoiceComponent.selectedIndexChoiceComponent == 0 ? ColorManager.primary : ColorManager.invisible,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5),
                     bottomLeft: Radius.circular(5),
@@ -40,35 +43,7 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
                 child: Center(
                   child: Text('Carburant',
                     style: TextStyle(
-                      color: selectedIndex == 0 ? ColorManager.thirdly : ColorManager.secondary,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () async {
-                setState(() {
-                  selectedIndex = 0;
-                });
-              },
-            ),
-          ),
-          Container(
-            width: 1,
-            height: 20,
-            color: ColorManager.secondary50,
-          ),
-          Expanded(
-            child: GestureDetector(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                  color: selectedIndex == 1 ? ColorManager.primary : ColorManager.invisible,
-                ),
-                child: Center(
-                  child: Text('Electrique',
-                    style: TextStyle(
-                      color: selectedIndex == 1 ? ColorManager.thirdly : ColorManager.secondary,
+                      color: ChoiceComponent.selectedIndexChoiceComponent == 0 ? ColorManager.thirdly : ColorManager.secondary,
                       fontSize: 14,
                     ),
                   ),
@@ -76,7 +51,11 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
               ),
               onTap: () {
                 setState(() {
-                  selectedIndex = 1;
+                  widget.controller.animateToPage(
+                    0,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                  );
                 });
               },
             ),
@@ -91,7 +70,39 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: selectedIndex == 2 ? ColorManager.primary : ColorManager.invisible,
+                  color: ChoiceComponent.selectedIndexChoiceComponent == 1 ? ColorManager.primary : ColorManager.invisible,
+                ),
+                child: Center(
+                  child: Text('Electrique',
+                    style: TextStyle(
+                      color: ChoiceComponent.selectedIndexChoiceComponent == 1 ? ColorManager.thirdly : ColorManager.secondary,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                setState(() {
+                  widget.controller.animateToPage(
+                    1,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                  );
+                });
+              },
+            ),
+          ),
+          Container(
+            width: 1,
+            height: 20,
+            color: ColorManager.secondary50,
+          ),
+          Expanded(
+            child: GestureDetector(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: ChoiceComponent.selectedIndexChoiceComponent == 2 ? ColorManager.primary : ColorManager.invisible,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(5),
                     bottomRight: Radius.circular(5),
@@ -100,7 +111,7 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
                 child: Center(
                   child: Text('Lavage',
                     style: TextStyle(
-                      color: selectedIndex == 2 ? ColorManager.thirdly : ColorManager.secondary,
+                      color: ChoiceComponent.selectedIndexChoiceComponent == 2 ? ColorManager.thirdly : ColorManager.secondary,
                       fontSize: 14,
                     ),
                   ),
@@ -108,7 +119,11 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
               ),
               onTap: () {
                 setState(() {
-                  selectedIndex = 2;
+                  widget.controller.animateToPage(
+                    2,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                  );
                 });
               },
             ),
