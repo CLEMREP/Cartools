@@ -68,7 +68,6 @@ class _FilterComponentState extends State<FilterComponent> {
               ],
             ),
           ),
-          const Spacer(),
           GestureDetector(
             onTap: () {
               GlobalState.filterController.isAttached

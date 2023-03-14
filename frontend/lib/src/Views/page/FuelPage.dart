@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Views/component/ChoiceFuelTypeComponent.dart';
 
 class FuelPage extends StatefulWidget {
   const FuelPage({Key? key}) : super(key: key);
@@ -10,8 +12,27 @@ class FuelPage extends StatefulWidget {
 class _FuelPageState extends State<FuelPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Carburant'),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+      child: Column(
+        children: [
+          Row(
+            children: const [
+              Text('Fuel type',
+                style: TextStyle(
+                  color: ColorManager.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ChoiceFuelTypeComponent(controller: PageController()),
+        ],
+      )
     );
   }
 }
