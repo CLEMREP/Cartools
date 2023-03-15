@@ -5,6 +5,7 @@ import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/GlobalState.dart';
 import 'package:frontend/src/Views/component/BetweenPlaceComponent.dart';
 import 'package:frontend/src/Views/component/ChoiceComponent.dart';
+import 'package:frontend/src/Views/component/ChoiceRadiusComponent.dart';
 import 'package:frontend/src/Views/component/FilterComponent.dart';
 import 'package:frontend/src/Views/component/NavBarComponent.dart';
 import 'package:frontend/src/Views/component/PlaceComponent.dart';
@@ -19,6 +20,7 @@ class StationPage extends StatefulWidget {
 class _StationPageState extends State<StationPage> {
   @override
   Widget build(BuildContext context) {
+    print('ok');
     return Scaffold(
       body: Stack(
         children: [
@@ -87,7 +89,6 @@ class _StationPageState extends State<StationPage> {
                 ),
                 Expanded(
                   child: FutureBuilder<List<GazStation>>(
-                    //future: GazStationRepository.getStationsZone(20),
                     future: GazStationRepository.getStationsFilter(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {

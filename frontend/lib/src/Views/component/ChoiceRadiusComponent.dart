@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/GlobalState.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
+import 'package:frontend/src/Views/page/StationPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChoiceRadiusComponent extends StatefulWidget {
@@ -46,9 +47,9 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
               ),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
+                prefs.setInt('radius', 1);
                 setState(() {
                   ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 0;
-                  prefs.setInt('radius', 1);
                 });
               },
             ),
@@ -77,9 +78,9 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
               ),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
+                prefs.setInt('radius', 5);
                 setState(() {
                   ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 1;
-                  prefs.setInt('radius', 5);
                 });
               },
             ),
@@ -108,9 +109,9 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
               ),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
+                prefs.setInt('radius', 20);
                 setState(() {
                   ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 2;
-                  prefs.setInt('radius', 20);
                 });
               },
             ),
@@ -139,9 +140,9 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
               ),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
+                prefs.setInt('radius', 50);
                 setState(() {
                   ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 3;
-                  prefs.setInt('radius', 50);
                 });
               },
             ),

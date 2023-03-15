@@ -1,5 +1,6 @@
 import 'package:frontend/src/Db/model/GazStation.dart';
 import 'package:frontend/src/Services/GeolocatorPosition.dart';
+import 'package:frontend/src/Views/component/ChoiceRadiusComponent.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,9 +39,22 @@ class GazStationRepository
   {
     List<GazStation> stations = [];
 
-    final prefs = await SharedPreferences.getInstance();
+    var radius = 0;
 
-    var radius = prefs.getInt('radius');
+    switch(ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent) {
+      case 0:
+        radius = 1;
+        break;
+      case 1:
+        radius = 5;
+        break;
+      case 2:
+        radius = 20;
+        break;
+      case 3:
+        radius = (50);
+        break;
+    }
 
     if(radius == null) {
       radius = 1;
