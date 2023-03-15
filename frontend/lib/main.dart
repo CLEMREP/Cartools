@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Db/model/User.dart';
 import 'package:frontend/src/Services/GlobalState.dart';
+import 'package:frontend/src/Services/Providers/FilterProvider.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
 import 'package:frontend/src/Views/page/StationPage.dart';
 import 'package:frontend/src/Views/page/HomePage.dart';
@@ -8,6 +9,7 @@ import 'package:frontend/src/Views/page/LoginPage.dart';
 import 'package:frontend/src/Views/page/RegisterFirstPage.dart';
 import 'package:frontend/src/Views/page/RegisterSecondPage.dart';
 import 'package:frontend/src/Views/page/RegisterVehiculePage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -22,7 +24,14 @@ void main() async {
     bool response2 = await QueryApi.getGazStations();
   }
 
-  runApp(MyApp(token: token));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FilterProvider()),
+      ],
+      child: MyApp(token: token),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
