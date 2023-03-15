@@ -87,17 +87,16 @@ class _StationPageState extends State<StationPage> {
                 ),
                 Expanded(
                   child: FutureBuilder<List<GazStation>>(
-                    future: GazStationRepository.getStationsZone(20),
+                    //future: GazStationRepository.getStationsZone(20),
+                    future: GazStationRepository.getStationsFilter(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
                           padding: const EdgeInsets.only(top: 20, bottom: 20),
                           shrinkWrap: true,
-                          //itemCount: GazStationRepository.gazStations.length * 2, // 10 alors 5 car 10 / 2 = 5 | 11 alors 6 car 11 / 2 = 5.5 donc 6
                           itemCount: snapshot.data!.length * 2,
                           itemBuilder: (context, index) {
                             return (index % 2 == 0)
-                            //? PlaceComponent(gazStation: GazStationRepository.gazStations[index ~/ 2])
                                 ? PlaceComponent(gazStation: snapshot.data![index ~/ 2])
                                 : const BetweenPlaceComponent();
                           },

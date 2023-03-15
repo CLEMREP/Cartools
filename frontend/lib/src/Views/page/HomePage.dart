@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             NavBarComponent(controller: controller),
-            //const FilterComponent(),
           ],
         ),
       ),
