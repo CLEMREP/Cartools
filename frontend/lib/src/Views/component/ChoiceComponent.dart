@@ -73,7 +73,7 @@ class _ChoiceComponentState extends State<ChoiceComponent> {
                   color: ChoiceComponent.selectedIndexChoiceComponent == 1 ? ColorManager.primary : ColorManager.invisible,
                 ),
                 child: Center(
-                  child: Text('Electrique',
+                  child: Text('Électrique',
                     style: TextStyle(
                       color: ChoiceComponent.selectedIndexChoiceComponent == 1 ? ColorManager.thirdly : ColorManager.secondary,
                       fontSize: 14,

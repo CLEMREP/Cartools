@@ -19,7 +19,7 @@ class _FuelPageState extends State<FuelPage> {
         children: [
           Row(
             children: const [
-              Text('Fuel type',
+              Text('Type de carburant',
                 style: TextStyle(
                   color: ColorManager.secondary,
                   fontSize: 16,
@@ -37,7 +37,7 @@ class _FuelPageState extends State<FuelPage> {
           ),
           Row(
             children: const [
-              Text('Radius',
+              Text('Rayon de recherche',
                 style: TextStyle(
                   color: ColorManager.secondary,
                   fontSize: 16,

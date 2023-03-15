@@ -134,8 +134,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: 130,
-                            height: 150,
+                            width: 380,
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                             decoration: BoxDecoration(
                               border: Border.all(
                                   width: 2,
@@ -143,126 +143,67 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.ev_station,
-                                  size: 40,
-                                  color: ColorManager.primary,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '60 L',
-                                  style: TextStyle(
+                            child:
+                            Row(
+                              children: [
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: const BoxDecoration(
                                     color: ColorManager.secondary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: const Center(
+                                    child: Icon(Icons.ev_station,
+                                      color: ColorManager.thirdly,
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 130,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.secondary
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.discount,
-                                  size: 40,
-                                  color: ColorManager.primary,
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '6 L / 100',
-                                  style: TextStyle(
-                                    color: ColorManager.secondary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 130,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.secondary
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.ev_station,
-                                  size: 40,
-                                  color: ColorManager.primary,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '60 L',
-                                  style: TextStyle(
-                                    color: ColorManager.secondary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 130,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.secondary
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.discount,
-                                  size: 40,
-                                  color: ColorManager.primary,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '6 L / 100',
-                                  style: TextStyle(
-                                    color: ColorManager.secondary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                Container(
+                                  width: 280,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Capacité du réservoir',
+                                        style: const TextStyle(
+                                          color: ColorManager.secondary,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            const Text('75',
+                                              style: TextStyle(
+                                                color: ColorManager.primary,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              'L',
+                                              style: const TextStyle(
+                                                color: ColorManager.secondary,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ]
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -272,7 +213,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -280,8 +221,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: 130,
-                            height: 150,
+                            width: 380,
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                             decoration: BoxDecoration(
                               border: Border.all(
                                   width: 2,
@@ -289,53 +230,67 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.ev_station,
-                                  size: 40,
-                                  color: ColorManager.primary,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '60 L',
-                                  style: TextStyle(
+                            child:
+                            Row(
+                              children: [
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: const BoxDecoration(
                                     color: ColorManager.secondary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: const Center(
+                                    child: Icon(Icons.ev_station,
+                                      color: ColorManager.thirdly,
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 130,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.secondary
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.discount,
-                                  size: 40,
-                                  color: ColorManager.primary,
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '6 L / 100',
-                                  style: TextStyle(
-                                    color: ColorManager.secondary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                Container(
+                                  width: 280,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Consommation moyenne',
+                                        style: const TextStyle(
+                                          color: ColorManager.secondary,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            const Text('8.5',
+                                              style: TextStyle(
+                                                color: ColorManager.primary,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              'L/100',
+                                              style: const TextStyle(
+                                                color: ColorManager.secondary,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ]
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
