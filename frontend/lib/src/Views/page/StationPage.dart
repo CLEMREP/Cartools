@@ -92,19 +92,31 @@ class _StationPageState extends State<StationPage> {
                   child: Consumer<FilterProvider>(
                     builder: (context, filter, child) {
                       return FutureBuilder<List<GazStation>>(
-                        future: GazStationRepository.getStationsFilter(),
+                        future: GazStationRepository.getStationsFilter(filter),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            return ListView.builder(
-                              padding: const EdgeInsets.only(top: 20, bottom: 20),
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length * 2,
-                              itemBuilder: (context, index) {
-                                return (index % 2 == 0)
-                                    ? PlaceComponent(gazStation: snapshot.data![index ~/ 2])
-                                    : const BetweenPlaceComponent();
-                              },
-                            );
+                            if(snapshot.data!.isEmpty) {
+                              return Center(
+                                child: Text(
+                                  'Aucun résultat',
+                                  style: const TextStyle(
+                                    color: ColorManager.secondary,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return ListView.builder(
+                                padding: const EdgeInsets.only(top: 20, bottom: 20),
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.length * 2,
+                                itemBuilder: (context, index) {
+                                  return (index % 2 == 0)
+                                      ? PlaceComponent(gazStation: snapshot.data![index ~/ 2], fuelType: filter.fuelType)
+                                      : const BetweenPlaceComponent();
+                                },
+                              );
+                            }
                           } else if (snapshot.hasError) {
                             return Center(
                               child: Text(

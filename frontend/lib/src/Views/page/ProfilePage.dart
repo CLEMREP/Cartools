@@ -129,81 +129,68 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 50,
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 2,
+                            color: ColorManager.secondary
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: 380,
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.secondary
-                              ),
-                              borderRadius: BorderRadius.circular(20),
+                            width: 60,
+                            height: 60,
+                            decoration: const BoxDecoration(
+                              color: ColorManager.secondary,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
-                            child:
-                            Row(
+                            child: const Center(
+                              child: Icon(Icons.ev_station,
+                                color: ColorManager.thirdly,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: const BoxDecoration(
+                                const Text(
+                                  'Capacité du réservoir',
+                                  style: TextStyle(
                                     color: ColorManager.secondary,
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  child: const Center(
-                                    child: Icon(Icons.ev_station,
-                                      color: ColorManager.thirdly,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
                                 ),
                                 Container(
-                                  width: 280,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Capacité du réservoir',
-                                        style: const TextStyle(
-                                          color: ColorManager.secondary,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          overflow: TextOverflow.ellipsis,
+                                  child: Row(
+                                      children: const [
+                                        Text('75',
+                                          style: TextStyle(
+                                            color: ColorManager.primary,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            const Text('75',
-                                              style: TextStyle(
-                                                color: ColorManager.primary,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 4,
-                                            ),
-                                            Text(
-                                              'L',
-                                              style: const TextStyle(
-                                                color: ColorManager.secondary,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ]
+                                        SizedBox(
+                                          width: 4,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          'L',
+                                          style: TextStyle(
+                                            color: ColorManager.secondary,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ]
                                   ),
                                 ),
                               ],
@@ -216,81 +203,68 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 20,
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 2,
+                            color: ColorManager.secondary
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: 380,
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: ColorManager.secondary
-                              ),
-                              borderRadius: BorderRadius.circular(20),
+                            width: 60,
+                            height: 60,
+                            decoration: const BoxDecoration(
+                              color: ColorManager.secondary,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
-                            child:
-                            Row(
+                            child: const Center(
+                              child: Icon(Icons.ev_station,
+                                color: ColorManager.thirdly,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: const BoxDecoration(
+                                const Text(
+                                  'Consommation moyenne',
+                                  style: TextStyle(
                                     color: ColorManager.secondary,
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  child: const Center(
-                                    child: Icon(Icons.ev_station,
-                                      color: ColorManager.thirdly,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
                                 ),
                                 Container(
-                                  width: 280,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Consommation moyenne',
-                                        style: const TextStyle(
-                                          color: ColorManager.secondary,
+                                  child: Row(
+                                    children: const [
+                                      Text('8.5',
+                                        style: TextStyle(
+                                          color: ColorManager.primary,
                                           fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        'L/100',
+                                        style: TextStyle(
+                                          color: ColorManager.secondary,
                                           fontSize: 18,
-                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            const Text('8.5',
-                                              style: TextStyle(
-                                                color: ColorManager.primary,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 4,
-                                            ),
-                                            Text(
-                                              'L/100',
-                                              style: const TextStyle(
-                                                color: ColorManager.secondary,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ]
-                                        ),
-                                      ),
-                                    ],
+                                    ]
                                   ),
                                 ),
                               ],

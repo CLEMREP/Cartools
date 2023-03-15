@@ -11,8 +11,6 @@ class ChoiceRadiusComponent extends StatefulWidget {
 
   final PageController controller;
 
-  static int selectedIndexChoiceRadiusComponent = 0;
-
   const ChoiceRadiusComponent({Key? key, required PageController this.controller}) : super(key: key);
 
   @override
@@ -37,13 +35,13 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
-                      color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 0 ? ColorManager.primary : ColorManager.invisible,
+                      color: filter.radius == 0 ? ColorManager.primary : ColorManager.invisible,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text('1 km',
                         style: TextStyle(
-                          color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 0 ? ColorManager.thirdly : ColorManager.secondary,
+                          color: filter.radius == 0 ? ColorManager.thirdly : ColorManager.secondary,
                           fontSize: 14,
                         ),
                       ),
@@ -53,8 +51,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                     final prefs = await SharedPreferences.getInstance();
                     prefs.setInt('radius', 1);
                     setState(() {
-                      ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 0;
-                      filter.saveFilter();
+                      filter.setRadius(0);
                     });
                   },
                 ),
@@ -69,13 +66,13 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
-                      color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 1 ? ColorManager.primary : ColorManager.invisible,
+                      color: filter.radius == 1 ? ColorManager.primary : ColorManager.invisible,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text('5 km',
                         style: TextStyle(
-                          color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 1 ? ColorManager.thirdly : ColorManager.secondary,
+                          color: filter.radius == 1 ? ColorManager.thirdly : ColorManager.secondary,
                           fontSize: 14,
                         ),
                       ),
@@ -85,8 +82,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                     final prefs = await SharedPreferences.getInstance();
                     prefs.setInt('radius', 5);
                     setState(() {
-                      ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 1;
-                      filter.saveFilter();
+                      filter.setRadius(1);
                     });
                   },
                 ),
@@ -101,13 +97,13 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
-                      color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 2 ? ColorManager.primary : ColorManager.invisible,
+                      color: filter.radius == 2 ? ColorManager.primary : ColorManager.invisible,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text('20 km',
                         style: TextStyle(
-                          color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 2 ? ColorManager.thirdly : ColorManager.secondary,
+                          color: filter.radius == 2 ? ColorManager.thirdly : ColorManager.secondary,
                           fontSize: 14,
                         ),
                       ),
@@ -117,8 +113,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                     final prefs = await SharedPreferences.getInstance();
                     prefs.setInt('radius', 20);
                     setState(() {
-                      ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 2;
-                      filter.saveFilter();
+                      filter.setRadius(2);
                     });
                   },
                 ),
@@ -133,13 +128,13 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
-                      color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 3 ? ColorManager.primary : ColorManager.invisible,
+                      color: filter.radius == 3 ? ColorManager.primary : ColorManager.invisible,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text('50 km',
                         style: TextStyle(
-                          color: ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent == 3 ? ColorManager.thirdly : ColorManager.secondary,
+                          color: filter.radius == 3 ? ColorManager.thirdly : ColorManager.secondary,
                           fontSize: 14,
                         ),
                       ),
@@ -149,8 +144,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                     final prefs = await SharedPreferences.getInstance();
                     prefs.setInt('radius', 50);
                     setState(() {
-                      ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent = 3;
-                      filter.saveFilter();
+                      filter.setRadius(3);
                     });
                   },
                 ),

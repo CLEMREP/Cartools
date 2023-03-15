@@ -1,5 +1,6 @@
 import 'package:frontend/src/Db/model/GazStation.dart';
 import 'package:frontend/src/Services/GeolocatorPosition.dart';
+import 'package:frontend/src/Services/Providers/FilterProvider.dart';
 import 'package:frontend/src/Views/component/ChoiceRadiusComponent.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,29 +20,19 @@ class GazStationRepository
     gazStations.add(gazStation);
   }
 
-  static Future<List<GazStation>> getStationsZone(double zone) async
+  static getDistance(double lat1, double lon1, double lat2, double lon2)
   {
-    List<GazStation> stations = [];
+    double distance = Geolocator.distanceBetween(lat1, lon1, lat2, lon2);
 
-    Position position = await GeolocatorPosition.determinePosition();
-
-    for(GazStation gazStation in gazStations) {
-      double distance = Geolocator.distanceBetween(position.latitude, position.longitude, gazStation.latitude, gazStation.longitude);
-      if (distance / 1000 <= zone) {
-        stations.add(gazStation);
-      }
-    }
-
-    return stations;
+    return distance / 1000;
   }
 
-  static Future<List<GazStation>> getStationsFilter() async
+  static Future<List<GazStation>> getStationsFilter(FilterProvider filter) async
   {
     List<GazStation> stations = [];
 
-    var radius = 0;
-
-    switch(ChoiceRadiusComponent.selectedIndexChoiceRadiusComponent) {
+    var radius = 1;
+    switch(filter.radius) {
       case 0:
         radius = 1;
         break;
@@ -56,8 +47,26 @@ class GazStationRepository
         break;
     }
 
-    if(radius == null) {
-      radius = 1;
+    var fuelType = 'SP95';
+    switch(filter.fuelType) {
+      case 0:
+        fuelType = 'SP95';
+        break;
+      case 1:
+        fuelType = 'SP98';
+        break;
+      case 2:
+        fuelType = 'E10';
+        break;
+      case 3:
+        fuelType = 'E85';
+        break;
+      case 4:
+        fuelType = 'Gazole';
+        break;
+      case 5:
+        fuelType = 'GPLc';
+        break;
     }
 
     Position position = await GeolocatorPosition.determinePosition();
@@ -65,7 +74,11 @@ class GazStationRepository
     for(GazStation gazStation in gazStations) {
       double distance = Geolocator.distanceBetween(position.latitude, position.longitude, gazStation.latitude, gazStation.longitude);
       if (distance / 1000 <= double.parse(radius.toString())) {
-        stations.add(gazStation);
+        for(var gazPrice in gazStation.gazPrices) {
+          if (gazPrice.fuelType == fuelType) {
+            stations.add(gazStation);
+          }
+        }
       }
     }
 
