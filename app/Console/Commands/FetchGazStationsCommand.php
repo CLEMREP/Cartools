@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CompleteGazStationsJob;
 use App\Jobs\FetchGazStationsJob;
 use Illuminate\Console\Command;
 
@@ -27,5 +28,6 @@ class FetchGazStationsCommand extends Command
     public function handle(): void
     {
         FetchGazStationsJob::dispatch();
+        CompleteGazStationsJob::dispatch();
     }
 }

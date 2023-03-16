@@ -19,7 +19,7 @@ class CarController extends Controller
     {
         /** @var array $data */
         $data = $request->validated();
-        $data['user_id'] = $request->user()->getKey();
+        $data['user_id'] = $request->user()?->getKey();
 
         $car = $this->carRepository->create($data);
 
