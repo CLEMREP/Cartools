@@ -19,6 +19,8 @@ class GazStationResource extends JsonResource
         return [
             'id' => $this->resource->getKey(),
             'station_id' => $this->resource->gaz_station_id,
+            'name' => $this->resource->name,
+            'brand' => $this->resource->brand,
             'latitude' => $this->resource->latitude,
             'longitude' => $this->resource->longitude,
             'postal_code' => $this->resource->postal_code,
