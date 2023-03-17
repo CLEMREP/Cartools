@@ -92,7 +92,7 @@ class _StationPageState extends State<StationPage> {
                   child: Consumer<FilterProvider>(
                     builder: (context, filter, child) {
                       return FutureBuilder<List<GazStation>>(
-                        future: GazStationRepository.getStationsFilter(filter),
+                        future: GazStationRepository.getStationsFilter(filter, 0, 0, 0),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             if(snapshot.data!.isEmpty) {

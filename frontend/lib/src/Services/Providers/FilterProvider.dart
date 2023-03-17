@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 
 class FilterProvider extends ChangeNotifier {
   int _radius = 0;

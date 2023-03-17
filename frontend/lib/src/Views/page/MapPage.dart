@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:frontend/src/Db/repository/GazStationRepository.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/Providers/FilterProvider.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,26 +17,32 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   var stations = [];
+  double latitude = 0;
+  double longitude = 0;
+  int radius = 10;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Consumer<FilterProvider>(
         builder: (context, filter, child) {
           return FutureBuilder(
-            future: GazStationRepository.getStationsFilter(filter),
-            builder: (context, AsyncSnapshot<List> snapshot) {
+            future: GazStationRepository.getStationsMap(filter, latitude, longitude, radius),
+            builder: (context, AsyncSnapshot<Map> snapshot) {
               MapController mapController = MapController();
               if (snapshot.hasData) {
                 return FlutterMap(
                   mapController: mapController,
                   options: MapOptions(
                     onPositionChanged: (tapPosition, point) => {
-                      print(mapController.zoom),
+                      setState(() {
+                        latitude = mapController.center.latitude;
+                        longitude = mapController.center.longitude;
+                      }),
                     },
                     onPointerUp: (tapPosition, point) => {
                       if(mapController.zoom >= 12) {
                         setState(() {
-                          stations = snapshot.data!;
+                          stations = snapshot.data!['stations'];
                         }),
                       } else {
                         setState(() {
@@ -43,9 +50,8 @@ class _MapPageState extends State<MapPage> {
                         }),
                       }
                     },
-                    center: LatLng(2, 40),
-                    //zoom: 13.0,
-                    zoom: 5.0,
+                    center: LatLng(snapshot.data!['latitude'], snapshot.data!['longitude']),
+                    zoom: 10.0,
                   ),
                   children: [
                     TileLayer(
