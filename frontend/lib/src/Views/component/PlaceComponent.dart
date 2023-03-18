@@ -93,7 +93,7 @@ class _PlaceComponentState extends State<PlaceComponent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.gazStation.address,
+                        widget.gazStation.name == 'Inconnue' ? widget.gazStation.address : widget.gazStation.name,
                         style: const TextStyle(
                           color: ColorManager.secondary,
                           fontWeight: FontWeight.bold,
