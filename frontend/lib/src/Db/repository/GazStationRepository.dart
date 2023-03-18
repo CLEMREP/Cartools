@@ -27,7 +27,7 @@ class GazStationRepository
     return distance / 1000;
   }
 
-  static Future<List<GazStation>> getStationsFilter(FilterProvider filter) async
+  static Future<List<GazStation>> getStationsFilter(FilterProvider filter, double lat, double lon, int rad) async
   {
     List<GazStation> stations = [];
 
@@ -72,7 +72,19 @@ class GazStationRepository
     Position position = await GeolocatorPosition.determinePosition();
 
     for(GazStation gazStation in gazStations) {
-      double distance = Geolocator.distanceBetween(position.latitude, position.longitude, gazStation.latitude, gazStation.longitude);
+
+      double distance = 0;
+
+      if(lat != 0 && lon != 0) {
+        distance = Geolocator.distanceBetween(lat, lon, gazStation.latitude, gazStation.longitude);
+      } else {
+        distance = Geolocator.distanceBetween(position.latitude, position.longitude, gazStation.latitude, gazStation.longitude);
+      }
+
+      if(rad != 0) {
+        radius = rad;
+      }
+
       if (distance / 1000 <= double.parse(radius.toString())) {
         for(var gazPrice in gazStation.gazPrices) {
           if (gazPrice.fuelType == fuelType) {
@@ -83,5 +95,17 @@ class GazStationRepository
     }
 
     return stations;
+  }
+
+  static Future<Map> getStationsMap(filter, double lat, double lon, int radius) async
+  {
+    Position position = await GeolocatorPosition.determinePosition();
+    double latitude = position.latitude;
+    double longitude = position.longitude;
+    return {
+      'stations': await getStationsFilter(filter, lat, lon, radius),
+      'latitude': latitude,
+      'longitude': longitude,
+    };
   }
 }
