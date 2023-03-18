@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/Db/model/User.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Views/page/SettingsPage.dart';
 
@@ -172,18 +173,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Container(
                                   child: Row(
-                                      children: const [
-                                        Text('75',
+                                      children: [
+                                        Text(
+                                          (User.vehicule?.getReservoir()).toString(),
                                           style: TextStyle(
                                             color: ColorManager.primary,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 4,
                                         ),
-                                        Text(
+                                        const Text(
                                           'L',
                                           style: TextStyle(
                                             color: ColorManager.secondary,
@@ -246,18 +248,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Container(
                                   child: Row(
-                                    children: const [
-                                      Text('8.5',
+                                    children: [
+                                      Text(
+                                        (User.vehicule?.getConsumption()).toString(),
                                         style: TextStyle(
                                           color: ColorManager.primary,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 4,
                                       ),
-                                      Text(
+                                      const Text(
                                         'L/100',
                                         style: TextStyle(
                                           color: ColorManager.secondary,
