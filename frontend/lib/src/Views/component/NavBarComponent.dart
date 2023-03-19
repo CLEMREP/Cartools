@@ -70,7 +70,7 @@ class _NavBarComponentState extends State<NavBarComponent> {
                     child: Column(
                         children: [
                           Icon(
-                            Icons.car_crash,
+                            Icons.ev_station,
                             color: NavBarComponent.selectedIndex == 1 ? ColorManager.thirdly : ColorManager.thirdly50,
                             size: 30,
                           ),

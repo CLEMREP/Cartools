@@ -17,9 +17,14 @@ class QueryApi
 
   QueryApi._internal();
 
+  static final String urlDev = 'http://cartools.test/api';
+  static final String urlProd = 'https://cartools.binary-cloud.fr/api';
+
+  static final String url = QueryApi.urlProd;
+
   static Future<bool> register(String firstName, String lastName, String email, String password, String passwordConfirmation) async
   {
-    final response = await http.post(Uri.parse('http://cartools.test/api/register'), body: {
+    final response = await http.post(Uri.parse('${QueryApi.url}/register'), body: {
       'firstname': firstName,
       'lastname': lastName,
       'email': email,
@@ -41,7 +46,7 @@ class QueryApi
 
   static Future<bool> login(String email, String password) async
   {
-    final response = await http.post(Uri.parse('http://cartools.test/api/login'), body: {
+    final response = await http.post(Uri.parse('${QueryApi.url}/login'), body: {
       'email': email,
       'password': password,
     });
@@ -60,7 +65,7 @@ class QueryApi
 
   static Future<bool> logout() async
   {
-    final response = await http.post(Uri.parse('http://cartools.test/api/logout'),
+    final response = await http.post(Uri.parse('${QueryApi.url}/logout'),
       headers: {
         'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
       },);
@@ -79,7 +84,7 @@ class QueryApi
 
   static Future<bool> getUser() async
   {
-    final response = await http.get(Uri.parse('http://cartools.test/api/user'),
+    final response = await http.get(Uri.parse('${QueryApi.url}/user'),
       headers: {
         'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
       },);
@@ -96,7 +101,7 @@ class QueryApi
 
   static Future<bool> setVehicule() async
   {
-    final response = await http.post(Uri.parse('http://cartools.test/api/car'),
+    final response = await http.post(Uri.parse('${QueryApi.url}/car'),
       headers: {
         'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
       },
@@ -116,7 +121,7 @@ class QueryApi
 
   static Future<bool> getGazStations() async
   {
-    final response = await http.get(Uri.parse('http://cartools.test/api/gaz-stations'),
+    final response = await http.get(Uri.parse('${QueryApi.url}/gaz-stations'),
       headers: {
         'Authorization': 'Bearer ' + (await SharedPreferences.getInstance()).getString('token')!,
       },);

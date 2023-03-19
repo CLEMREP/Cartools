@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Views/component/ChoiceFuelTypeComponent.dart';
+import 'package:frontend/src/Views/component/ChoiceOrderComponent.dart';
 import 'package:frontend/src/Views/component/ChoiceRadiusComponent.dart';
 
 class FuelPage extends StatefulWidget {
@@ -50,6 +51,24 @@ class _FuelPageState extends State<FuelPage> {
             height: 10,
           ),
           ChoiceRadiusComponent(controller: PageController()),
+          const SizedBox(
+            height: 40,
+          ),
+          Row(
+            children: const [
+              Text('Ordre de tri',
+                style: TextStyle(
+                  color: ColorManager.secondary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ChoiceOrderComponent(controller: PageController()),
         ],
       )
     );

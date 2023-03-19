@@ -3,7 +3,7 @@ import 'package:frontend/src/Db/model/GazStation.dart';
 class GazPrice
 {
   String fuelType;
-  String price;
+  double price;
   DateTime lastUpdate;
   GazStation gazStation;
 
@@ -17,7 +17,7 @@ class GazPrice
   factory GazPrice.fromJson(Map<String, dynamic> json, GazStation gazStation) {
     return GazPrice(
       fuelType: json['fuel_type'],
-      price: json['price'],
+      price: double.parse(json['price'].toString()),
       lastUpdate: DateTime.parse(json['last_update']),
       gazStation: gazStation,
     );

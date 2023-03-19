@@ -49,7 +49,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   ),
                   onTap: () async {
                     final prefs = await SharedPreferences.getInstance();
-                    prefs.setInt('radius', 1);
+                    prefs.setInt('radius', 0);
                     setState(() {
                       filter.setRadius(0);
                     });
@@ -80,7 +80,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   ),
                   onTap: () async {
                     final prefs = await SharedPreferences.getInstance();
-                    prefs.setInt('radius', 5);
+                    prefs.setInt('radius', 1);
                     setState(() {
                       filter.setRadius(1);
                     });
@@ -111,7 +111,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   ),
                   onTap: () async {
                     final prefs = await SharedPreferences.getInstance();
-                    prefs.setInt('radius', 20);
+                    prefs.setInt('radius', 2);
                     setState(() {
                       filter.setRadius(2);
                     });
@@ -142,7 +142,7 @@ class _ChoiceRadiusComponentState extends State<ChoiceRadiusComponent> {
                   ),
                   onTap: () async {
                     final prefs = await SharedPreferences.getInstance();
-                    prefs.setInt('radius', 50);
+                    prefs.setInt('radius', 3);
                     setState(() {
                       filter.setRadius(3);
                     });

@@ -4,6 +4,7 @@ import 'package:frontend/src/Services/GlobalState.dart';
 import 'package:frontend/src/Services/Providers/FilterProvider.dart';
 import 'package:frontend/src/Services/http/QueryApi.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChoiceFuelTypeComponent extends StatefulWidget {
 
@@ -62,7 +63,9 @@ class _ChoiceFuelTypeComponentState extends State<ChoiceFuelTypeComponent> {
                           ),
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('fuelType', 0);
                         setState(() {
                           filter.setFuelType(0);
                         });
@@ -97,7 +100,9 @@ class _ChoiceFuelTypeComponentState extends State<ChoiceFuelTypeComponent> {
                           ),
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('fuelType', 1);
                         setState(() {
                           filter.setFuelType(1);
                         });
@@ -132,7 +137,9 @@ class _ChoiceFuelTypeComponentState extends State<ChoiceFuelTypeComponent> {
                           ),
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('fuelType', 2);
                         setState(() {
                           filter.setFuelType(2);
                         });
@@ -167,7 +174,9 @@ class _ChoiceFuelTypeComponentState extends State<ChoiceFuelTypeComponent> {
                           ),
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('fuelType', 3);
                         setState(() {
                           filter.setFuelType(3);
                         });
@@ -202,7 +211,9 @@ class _ChoiceFuelTypeComponentState extends State<ChoiceFuelTypeComponent> {
                           ),
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('fuelType', 4);
                         setState(() {
                           filter.setFuelType(4);
                         });
@@ -237,7 +248,9 @@ class _ChoiceFuelTypeComponentState extends State<ChoiceFuelTypeComponent> {
                           ),
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('fuelType', 5);
                         setState(() {
                           filter.setFuelType(5);
                         });

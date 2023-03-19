@@ -31,6 +31,15 @@ class GazStationRepository
   {
     List<GazStation> stations = [];
 
+    if(filter.isStarted) {
+      final prefs = await SharedPreferences.getInstance();
+
+      filter.setFuelType(prefs.getInt('fuelType') ?? 0);
+      filter.setRadius(prefs.getInt('radius') ?? 0);
+      filter.setIsOrder(prefs.getBool('order') ?? false);
+      filter.setIsStarted(false);
+    }
+
     var radius = 1;
     switch(filter.radius) {
       case 0:
@@ -69,7 +78,25 @@ class GazStationRepository
         break;
     }
 
-    Position position = await GeolocatorPosition.determinePosition();
+    double latitude = 0;
+    double longitude = 0;
+
+    if(filter.location == null) {
+      try {
+        Position position = await GeolocatorPosition.determinePosition();
+        if(position == null) {
+          return stations;
+        } else {
+          latitude = position.latitude;
+          longitude = position.longitude;
+        }
+      } catch (e) {
+        return stations;
+      }
+    } else {
+      latitude = filter.location!.latitude;
+      longitude = filter.location!.longitude;
+    }
 
     for(GazStation gazStation in gazStations) {
 
@@ -78,7 +105,7 @@ class GazStationRepository
       if(lat != 0 && lon != 0) {
         distance = Geolocator.distanceBetween(lat, lon, gazStation.latitude, gazStation.longitude);
       } else {
-        distance = Geolocator.distanceBetween(position.latitude, position.longitude, gazStation.latitude, gazStation.longitude);
+        distance = Geolocator.distanceBetween(latitude, longitude, gazStation.latitude, gazStation.longitude);
       }
 
       if(rad != 0) {
@@ -94,18 +121,60 @@ class GazStationRepository
       }
     }
 
+    if(filter.isOrder) {
+      stations.sort((a, b) {
+        var priceA = 0.0;
+        var priceB = 0.0;
+        for(var gazPrice in a.gazPrices) {
+          if (gazPrice.fuelType == fuelType) {
+            priceA = gazPrice.price;
+          }
+        }
+        for(var gazPrice in b.gazPrices) {
+          if (gazPrice.fuelType == fuelType) {
+            priceB = gazPrice.price;
+          }
+        }
+        return priceA.compareTo(priceB);
+      });
+    } else {
+      stations.sort((a, b) {
+        var distanceA = Geolocator.distanceBetween(latitude, longitude, a.latitude, a.longitude);
+        var distanceB = Geolocator.distanceBetween(latitude, longitude, b.latitude, b.longitude);
+        return distanceA.compareTo(distanceB);
+      });
+    }
+
     return stations;
   }
 
   static Future<Map> getStationsMap(filter, double lat, double lon, int radius) async
   {
-    Position position = await GeolocatorPosition.determinePosition();
-    double latitude = position.latitude;
-    double longitude = position.longitude;
-    return {
-      'stations': await getStationsFilter(filter, lat, lon, radius),
-      'latitude': latitude,
-      'longitude': longitude,
-    };
+    if(filter.location == null) {
+      try {
+        Position position = await GeolocatorPosition.determinePosition();
+        if(position == null) {
+          return {
+            'stations': [],
+            'position': null,
+          };
+        } else {
+          return {
+            'stations': await getStationsFilter(filter, lat, lon, radius),
+            'position': position,
+          };
+        }
+      } catch (e) {
+        return {
+          'stations': [],
+          'position': null,
+        };
+      }
+    } else {
+      return {
+        'stations': await getStationsFilter(filter, lat, lon, radius),
+        'position': filter.location,
+      };
+    }
   }
 }

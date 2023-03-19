@@ -10,6 +10,7 @@ import 'package:frontend/src/Views/component/ChoiceRadiusComponent.dart';
 import 'package:frontend/src/Views/component/FilterComponent.dart';
 import 'package:frontend/src/Views/component/NavBarComponent.dart';
 import 'package:frontend/src/Views/component/PlaceComponent.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:provider/provider.dart';
 
 class StationPage extends StatefulWidget {
@@ -51,15 +52,100 @@ class _StationPageState extends State<StationPage> {
                               Radius.circular(10),
                             ),
                           ),
-                          child: const TextField(
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10),
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: InputBorder.none,
-                              hintText: 'Rechercher',
-                            ),
+                          child: Consumer<FilterProvider>(
+                            builder: (context, filter, child) {
+                              return FutureBuilder<List<GazStation>>(
+                                future: GazStationRepository.getStationsFilter(filter, 0, 0, 0),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    if(snapshot.data!.isEmpty) {
+                                      return TextField(
+                                        onChanged: (value) async {
+                                          filter.setAddress(value);
+                                          if(value != '') {
+                                            try {
+                                              List<Location> locations = await locationFromAddress(value);
+                                              if(locations.length > 0) {
+                                                filter.setLocation(locations[0]);
+                                              } else {
+                                                filter.setLocation(null);
+                                              }
+                                            } catch (e) {
+                                              filter.setLocation(null);
+                                            }
+                                          } else {
+                                            filter.setLocation(null);
+                                          }
+                                          setState(() {});
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.all(10),
+                                          hintStyle: TextStyle(color: Colors.grey),
+                                          border: InputBorder.none,
+                                          hintText: 'Rechercher',
+                                        ),
+                                      );
+                                    } else {
+                                      return TextField(
+                                        onChanged: (value) async {
+                                          filter.setAddress(value);
+                                          if(value != '') {
+                                            try {
+                                              List<Location> locations = await locationFromAddress(value);
+                                              if(locations.length > 0) {
+                                                filter.setLocation(locations[0]);
+                                              } else {
+                                                filter.setLocation(null);
+                                              }
+                                            } catch (e) {
+                                              filter.setLocation(null);
+                                            }
+                                          } else {
+                                            filter.setLocation(null);
+                                          }
+                                          setState(() {});
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.all(10),
+                                          hintStyle: TextStyle(color: Colors.grey),
+                                          border: InputBorder.none,
+                                          hintText: 'Rechercher',
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    return TextField(
+                                      onChanged: (value) async {
+                                        filter.setAddress(value);
+                                        if(value != '') {
+                                          try {
+                                            List<Location> locations = await locationFromAddress(value);
+                                            if(locations.length > 0) {
+                                              filter.setLocation(locations[0]);
+                                            } else {
+                                              filter.setLocation(null);
+                                            }
+                                          } catch (e) {
+                                            filter.setLocation(null);
+                                          }
+                                        } else {
+                                          filter.setLocation(null);
+                                        }
+                                        setState(() {});
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(10),
+                                        hintStyle: TextStyle(color: Colors.grey),
+                                        border: InputBorder.none,
+                                        hintText: 'Rechercher',
+                                      ),
+                                    );
+                                  }
+                                }
+                              );
+                            }
                           ),
-                        )
+                        ),
                       ),
                       const SizedBox(
                         width: 20,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/Db/model/GazStation.dart';
+import 'package:frontend/src/Db/model/User.dart';
 import 'package:frontend/src/Db/repository/GazStationRepository.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
 import 'package:frontend/src/Services/GeolocatorPosition.dart';
@@ -43,9 +44,11 @@ class _PlaceComponentState extends State<PlaceComponent> {
     }
 
     var price = 'N/A';
+    var totalPrice = 'N/A';
     for (var gazPrice in widget.gazStation.gazPrices) {
       if (gazPrice.fuelType == fuelType) {
         price = gazPrice.price.toString() + '€';
+        totalPrice = (gazPrice.price * User.vehicule?.getReservoir()).toStringAsFixed(3) + '€';
       }
     }
 
@@ -119,6 +122,28 @@ class _PlaceComponentState extends State<PlaceComponent> {
                               ),
                               Text(
                                 price,
+                                style: const TextStyle(
+                                  color: ColorManager.primary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              const Text(
+                                '-',
+                                style: TextStyle(
+                                  color: ColorManager.secondary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                totalPrice,
                                 style: const TextStyle(
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold,

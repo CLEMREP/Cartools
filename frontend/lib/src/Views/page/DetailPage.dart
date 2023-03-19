@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:frontend/src/Db/model/GazStation.dart';
 import 'package:frontend/src/Db/repository/GazStationRepository.dart';
 import 'package:frontend/src/Services/ColorManager.dart';
+import 'package:frontend/src/Views/component/ButtonGoMapComponent.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 
 class DetailPage extends StatefulWidget {
   final GazStation gazStation;
@@ -66,6 +69,71 @@ class _DetailPageState extends State<DetailPage> {
                           borderRadius: BorderRadius.all(
                             Radius.circular(40),
                           ),
+                        ),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(40),
+                                ),
+                              child: FlutterMap(
+                                options: MapOptions(
+                                  center: LatLng(widget.gazStation.latitude, widget.gazStation.longitude),
+                                  zoom: 15.0,
+                                ),
+                                children: [
+                                  TileLayer(
+                                    /* urlTemplate: "https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}",
+                                    additionalOptions: {
+                                      'accessToken': "pk.eyJ1IjoibW9qbWlsbyIsImEiOiJja3Nlc295YmExM25lMnZtYzhsMnpzamd3In0.2zqTJpHL6B7VUIlPyqGdIw",
+                                    }, */
+                                    urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                  ),
+                                  MarkerLayer(
+                                    markers: [
+                                      Marker(
+                                        width: 45,
+                                        height: 45,
+                                        point: LatLng(widget.gazStation.latitude, widget.gazStation.longitude),
+                                        builder: (ctx) => Container(
+                                          decoration: BoxDecoration(
+                                            color: ColorManager.primary50,
+                                            borderRadius: BorderRadius.circular(50),
+                                          ),
+                                          child: Center(
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: 20,
+                                                  height: 20,
+                                                  decoration: BoxDecoration(
+                                                    color: ColorManager.thirdly,
+                                                    borderRadius: BorderRadius.circular(50),
+                                                    border: Border.all(
+                                                      color: ColorManager.primary,
+                                                      width: 4,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                color: ColorManager.secondary50,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(40),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
@@ -202,7 +270,7 @@ class _DetailPageState extends State<DetailPage> {
                                           const SizedBox(
                                             width: 8,
                                           ),
-                                          Text(gazPrice.price + ' €',
+                                          Text(gazPrice.price.toString() + ' €',
                                             style: const TextStyle(
                                               color: ColorManager.primary,
                                               fontSize: 14,
@@ -266,27 +334,7 @@ class _DetailPageState extends State<DetailPage> {
                 )
               ),
             ),
-            GestureDetector(
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                decoration: const BoxDecoration(
-                  color: ColorManager.secondary,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: Center(
-                  child: Text('Voir sur la carte',
-                    style: const TextStyle(
-                      color: ColorManager.thirdly,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            ButtonGoMapComponent(latitude: widget.gazStation.latitude, longitude: widget.gazStation.longitude, title: widget.gazStation.name == 'Inconnue' ? widget.gazStation.address : widget.gazStation.name),
           ],
         ),
       ),

@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           topRight: Radius.circular(40),
         ),
         minHeight: 0,
-        maxHeight: MediaQuery.of(context).size.height * 0.7, // 9
+        maxHeight: MediaQuery.of(context).size.height * 0.8, // 9
         backdropEnabled: true,
         controller: GlobalState.filterController,
         panel: const FilterComponent(),
