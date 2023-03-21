@@ -28,7 +28,6 @@ class _DetailPageState extends State<DetailPage> {
             Container(
               margin: const EdgeInsets.only(top: 50, bottom: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -48,10 +47,15 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                   ),
-                  const Text('Détails de la station',
-                    style: TextStyle(
+                  SizedBox(
+                      width: 20
+                  ),
+                  Text(
+                    widget.gazStation.name == 'Inconnue' ? 'Détails de la station' : widget.gazStation.name,
+                    style: const TextStyle(
                       color: ColorManager.secondary,
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   )
                 ],
@@ -141,7 +145,6 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       Container(
                         color: ColorManager.invisible,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: Row(
                           children: [
                             Row(
@@ -171,13 +174,29 @@ class _DetailPageState extends State<DetailPage> {
                                       Container(
                                         child: Row(
                                             children: [
+                                              Container(
+                                                constraints: const BoxConstraints(
+                                                  maxWidth: 125,
+                                                ),
+                                                child: Text(
+                                                  widget.gazStation.city,
+                                                  style: const TextStyle(
+                                                    color: ColorManager.secondary,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
                                               const Text(
-                                                'Distance:',
+                                                '-',
                                                 style: TextStyle(
                                                   color: ColorManager.secondary,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 14,
-                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                               const SizedBox(
@@ -250,84 +269,90 @@ class _DetailPageState extends State<DetailPage> {
                         height: 10,
                       ),
                       Container(
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    for(var gazPrice in widget.gazStation.gazPrices) Container(
-                                      margin: const EdgeInsets.symmetric(vertical: 5),
-                                      child: Row(
-                                        children: [
-                                          Text(gazPrice.fuelType + ':',
-                                            style: const TextStyle(
-                                              color: ColorManager.secondary,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(gazPrice.price.toString() + ' €',
-                                            style: const TextStyle(
-                                              color: ColorManager.primary,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(
-                                            ' - ' + gazPrice.lastUpdate.day.toString() + ' / ' + gazPrice.lastUpdate.month.toString() + ' / ' + gazPrice.lastUpdate.year.toString(),
-                                            style: const TextStyle(
-                                              color: ColorManager.secondary,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                            for(var gazPrice in widget.gazStation.gazPrices) Container(
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: ColorManager.secondary,
+                                  width: 2,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: ColorManager.secondary,
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                  ],
-                                )
-                            )
+                                    child: const Icon(
+                                      Icons.ev_station,
+                                      size: 30,
+                                      color: ColorManager.thirdly,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                gazPrice.fuelType,
+                                                style: const TextStyle(
+                                                  color: ColorManager.secondary,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              const Text(
+                                                '-',
+                                                style: TextStyle(
+                                                  color: ColorManager.secondary,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                gazPrice.price.toStringAsFixed(3) + '€',
+                                                style: const TextStyle(
+                                                  color: ColorManager.primary,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text('Mise à jour le ${gazPrice.lastUpdate.day}/${gazPrice.lastUpdate.month}/${gazPrice.lastUpdate.year}',
+                                          style: const TextStyle(
+                                            color: ColorManager.secondary,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        child: Row(
-                            children: [
-                              Text(
-                                widget.gazStation.city + ':',
-                                style: TextStyle(
-                                  color: ColorManager.secondary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                widget.gazStation.postalCode,
-                                style: const TextStyle(
-                                  color: ColorManager.primary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ]
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                     ],
                   ),
